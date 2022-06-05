@@ -1,5 +1,5 @@
 # fuzzy_workshop_ai
-Tugas Fuzzy Workshop AI
+Tugas Fuzzy Workshop AI\n
 Alur aplikasi
 1. User input => click hitung
 2. Menjalankan main.php 
