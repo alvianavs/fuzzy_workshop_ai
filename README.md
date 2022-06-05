@@ -12,4 +12,4 @@ Tugas Fuzzy Workshop AI
 
 <br>
    <b>Preview</b><br>
-![Webcapture](https://raw.githubusercontent.com/alvianavs/fuzzy_workshop_ai/main/assets/Webcapture.png)
+<img src="https://raw.githubusercontent.com/alvianavs/fuzzy_workshop_ai/main/assets/Webcapture.png">
