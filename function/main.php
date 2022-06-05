@@ -1,7 +1,30 @@
 <?php
 include_once 'template.php';
+$errors = [];
+$data = [];
 
-if (isset($_POST['submit'])) {
+for ($i = 0; $i <= 2; $i++) {
+    if (empty($_POST['v_min'.$i])) {
+        $errors['v_min'.$i] = 'Kolom dibawah harus diisi.';
+    }
+    if (empty($_POST['v_max'.$i])) {
+        $errors['v_max'.$i] = 'Kolom dibawah harus diisi.';
+    }
+}
+
+for ($i = 0; $i <= 1; $i++) {
+    if (empty($_POST['nilai'.$i])) {
+        $errors['nilai'.$i] = 'Kolom dibawah harus diisi.';
+    }
+}
+
+if (!empty($errors)) {
+    $data['success'] = false;
+    $data['errors'] = $errors;
+} else {
+    $data['success'] = true;
+    $data['message'] = 'Success!';
+
     for ($a = 0; $a <= 2; $a++) {
         $v_min[$a] = $_POST['v_min' . $a];
         $v_max[$a] = $_POST['v_max' . $a];
@@ -9,7 +32,7 @@ if (isset($_POST['submit'])) {
     for ($b = 0; $b <= 1; $b++) {
         $nilai[$b] = $_POST['nilai' . $b];
     }
-
+    
     for ($c = 0; $c <= 3; $c++) {
         $pmtrule[$c] = $_POST['pmtrule' . $c];
         $oprule[$c] = $_POST['oprule' . $c];
@@ -17,24 +40,6 @@ if (isset($_POST['submit'])) {
         $pdkrule[$c] = $_POST['pdkrule' . $c];
     }
 
-    // Cek apakah variabel kosong?
-    for ($i = 0; $i <= 2; $i++) {
-        if ($v_min[$i] == null) {
-            exit;
-        }
-        if ($v_max[$i] == null) {
-            exit;
-        }
-    }
-
-    // Cek apakah Ditanyakan kosong ?
-    for ($i = 0; $i <= 1; $i++) {
-        if ($nilai[$i] == null) {
-            exit;
-        }
-    }
-
-    // Pengecekan fungsi keanggotaan 
     for ($i = 0; $i <= 1; $i++) {
         if ($nilai[$i] <= $v_min[$i]) {
             $K[$i][0] = 1;
@@ -43,7 +48,7 @@ if (isset($_POST['submit'])) {
         } else if ($nilai[$i] >= $v_max[$i]) {
             $K[$i][0] = 0;
         }
-
+    
         if ($nilai[$i] <= $v_min[$i]) {
             $K[$i][1] = 0;
         } else if ($nilai[$i] >= $v_min[$i] && $nilai[$i] <= $v_max[$i]) {
@@ -52,7 +57,8 @@ if (isset($_POST['submit'])) {
             $K[$i][1] = 1;
         }
     }
-    cetakKeanggotaan($K);
+
+    $data['cetak_keanggotaan'] = cetakKeanggotaan($K);
 
     // Pengecekan Rule
     $JumZ = 0;
@@ -74,9 +80,9 @@ if (isset($_POST['submit'])) {
                 }
                 break;
         }
-
+    
         $jumRule += $rule[$i];
-
+    
         switch ($pdkrule[$i]) {
             case 0:
                 $nilZ[$i] = ($v_max[2] - ($rule[$i] * ($v_max[2] - $v_min[2])));
@@ -88,8 +94,10 @@ if (isset($_POST['submit'])) {
         $JumZ = ($JumZ + ($rule[$i] * $nilZ[$i]));
     }
 
-    cetakHasilRule($nilZ, $rule);
-
+    $data['cetak_rule'] = cetakHasilRule($nilZ, $rule);
+    
     $hasil = $JumZ / $jumRule;
-    cetakHasil(round($hasil));
+    $data['cetak_hasil'] = cetakHasil(round($hasil));
 }
+
+echo json_encode($data);
