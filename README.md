@@ -12,4 +12,4 @@ Tugas Fuzzy Workshop AI
 
 <br>
    <b>Preview</b><br>
-![Webcapture!](assets/Web%20capture.png)
+![Webcapture](/assets/Webcapture.png)
