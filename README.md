@@ -11,4 +11,5 @@ Tugas Fuzzy Workshop AI
 
 <br>
    <b>Preview</b><br>
-![Web capture_5-6-2022_144032_localhost](https://user-images.githubusercontent.com/63941068/172040787-e3a19d6e-d7b9-497f-ab71-1b642c2a816f.jpeg)
+![Webcapture!](https://user-images.githubusercontent.com/63941068/172041097-56dcce1d-5370-4b57-b6f6-f6cbec8d34b7.png)
+
